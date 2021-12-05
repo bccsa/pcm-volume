@@ -1,6 +1,6 @@
 pcm-volume
 ===========
-This module changes the volume of a given PCM data stream. At the moment only signed 16bit PCM data is supported, also I'm not quite sure about this as my knowledge about PCM is very limited.
+This module changes the volume of a given PCM data stream. It should work with any type of little endian signed integer PCM stream, but not (yet) with floating point formats.
 I don't know whether this is the right way to do things. Feel free to contact me/open a pull request if you want to add something.
 
 Install
@@ -35,7 +35,9 @@ var decoder = new lame.Decoder({
 var speaker = new Speaker();
 
 // Create a volume instance
-var v = new volume();
+var volume = 1;         // Optional initial volume (default = 1);
+var bitDepth = 16;      // Optional PCM bit depth (default = 16). Supported values: 8; 16; 24; 32;
+var v = new volume(volume, bitDepth);
 
 // Wait 5s, then change the volume to 50%
 setTimeout(function() {
