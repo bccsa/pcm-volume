@@ -44,6 +44,13 @@ class Volume extends Transform {
     this.multiplier = Math.tan(this.volume);
   }
 
+  setBitDepth(bitDepth) {
+    this._bitDepth = bitDepth;
+    this._wordLen = this._bitDepth/8;
+    this._wordMax = Math.pow(2, this._bitDepth - 1) - 1;
+    this._wordMin = -this._wordMax - 1;
+  }
+
   _transform(buf, encoding, callback) {
     // create a new Buffer for the transformed data
     let out = Buffer.alloc(buf.length);
